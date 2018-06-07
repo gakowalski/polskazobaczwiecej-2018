@@ -41,15 +41,20 @@ $doc->addStyleSheet($template_path . '/css/style.css');
 $doc->addScript($template_path . '/js/default.js');
 
 $body_classes =
-  'site '
-  . $option
-	. ' view-' . $view
+  "site $option view-$view"
 	. ($layout ? ' layout-' . $layout : ' no-layout')
 	. ($task ? ' task-' . $task : ' no-task')
 	. ($itemid ? ' itemid-' . $itemid : '')
   . ($this->direction === 'rtl' ? ' rtl' : '')
   . ($high_contrast_enabled == true? ' high-contrast' : ' low-contrast')
   . ($frontpage_enabled == true? ' frontpage' : ' not-frontpage');
+
+function create_position($position, $show_on_search_results_view = true) {
+  global $option;
+  if ($show_on_search_results_view && $option != 'com_search'):
+    ?><div id="<?php echo $position; ?>" class="position"><div class="content"><jdoc:include type="modules" name="<?php echo $position; ?>" style="none" /></div></div><?php
+  endif;
+}
 
 ?>
 <!DOCTYPE html>
@@ -62,46 +67,59 @@ $body_classes =
   <?php endif; ?>
 </head>
 <body class="<?php echo $body_classes; ?>">
-
-  <div id="info">
-  <jdoc:include type="modules" name="info" style="none" />
-  </div>
+  <?php create_position('info'); ?>
 
   <header>
-  <jdoc:include type="modules" name="logo" style="none" />
-  <nav role="navigation">
-    <jdoc:include type="modules" name="nav" style="none" />
-  </nav>
-  <jdoc:include type="modules" name="header" style="none" />
+    <div class="content">
+        <h1 id="logo"><a href="<?php echo JUri::base(); ?>" title="Strona główna"><?php echo $sitename; ?></a></h1>
+        <nav role="navigation"><jdoc:include type="modules" name="nav" style="none" /></nav>
+
+        <div id="facebook">
+          <a target="_blank" href="https://www.facebook.com/WeekendNizszychCen/">
+            <div id="facebook-logo"></div>
+            <span class="hidden-text">Polska Zobacz Więcej na Facebooku</span>
+          </a>
+        </div>
+
+        <div id="font-resize">
+          <a id="font-resize-small" href="<?php echo JUri::current(); ?>?font_resize=small"><span>Czcionka normalna</span></a>
+          <a id="font-resize-medium" href="<?php echo JUri::current(); ?>?font_resize=medium"><span>Czcionka średnia</span></a>
+          <a id="font-resize-large" href="<?php echo JUri::current(); ?>?font_resize=large"><span>Czcionka duża</span></a>
+        </div>
+
+        <div id="contrast">
+          <a href="<?php echo JUri::current(); ?>?toggle_contrast=true">Wersja <?php echo $high_contrast_enabled == true ? 'graficzna' : 'kontrastowa'; ?></a>
+        </div>
+    </div>
+
+    <?php if ($high_contrast_enabled): ?>
+    <h1><?php echo $sitename; ?></h1>
+    <?php endif; ?>
   </header>
 
-  <?php if ($option != 'com_search'): ?>
-  <jdoc:include type="modules" name="before_content" style="none" />
-  <?php endif; ?>
+  <div id="video-banner">
+    <div class="content">
+      <p>Ogólnopolska akcja zniżkowa</p>
+	    <p>POLSKA ZOBACZ WIĘCEJ – WEEKEND ZA PÓŁ CENY</p>
+	    <p>5 – 7 października 2018</p>
+      <a class="btn">Dowiedz się więcej</a>
+      <a class="btn">Dodaj ofertę</a>
+    </div>
+  </div>
+
+  <?php create_position('before_content', false); ?>
 
   <main role="main">
+    <div class="content">
     <jdoc:include type="message" />
-
-    <?php if ($frontpage_enabled == false && $this->countModules('breadcrumbs')): ?>
-      <jdoc:include type="modules" name="breadcrumbs" style="none" />
-    <?php endif; ?>
-
-    <?php if ($option != 'com_search'): ?>
-      <jdoc:include type="modules" name="content" style="none" />
-    <?php endif; ?>
-
+    <?php if ($frontpage_enabled == false && $this->countModules('breadcrumbs')) { create_position('breadcrumbs'); } ?>
 		<jdoc:include type="component" />
+    </div>
   </main>
 
-  <?php if ($option != 'com_search'): ?>
-  <jdoc:include type="modules" name="after_content" style="none" />
-  <?php endif; ?>
-
-  <footer role="contentinfo">
-    <jdoc:include type="modules" name="footer" style="none" />
-  </footer>
-
-  <jdoc:include type="modules" name="debug" style="none" />
+  <?php create_position('after_content', false); ?>
+  <footer role="contentinfo"><?php create_position('footer'); ?></footer>
+  <?php create_position('debug'); ?>
 
 </body>
 </html>

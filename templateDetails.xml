@@ -21,11 +21,10 @@
     <position>info</position>
 		<position>logo</position>
 		<position>nav</position>
-    <position>header</position>
     <position>before_content</position>
-		<position>content</position>
 		<position>after_content</position>
 		<position>footer</position>
+		<position>breadcrumbs</position>
 	</positions>
 	<updateservers>
 		<server type="extension" name="Polska Zobacz Więcej 2018" priority="1">https://raw.githubusercontent.com/gakowalski/polskazobaczwiecej-2018/master/updates.xml</server>

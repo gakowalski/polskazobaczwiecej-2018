@@ -17,6 +17,152 @@ body {
   }
 }
 
+header > .content,
+main > .content,
+div.position > div.content,
+#video-banner > .content {
+   width: 1140px;
+   margin: 0 auto;
+}
+
+header {
+  background-color: #d42128;
+  color: #fff;
+  font-size: 1.4em;
+}
+
+header > .content {
+  display: grid;
+  grid-template-areas: "logo nav facebook font-resize contrast";
+  grid-template-columns: 243px auto 29px min-content min-content;
+  grid-template-rows: 120px;
+  grid-column-gap: 1em;
+}
+
+header #logo { grid-area: logo; }
+header nav { grid-area: nav; }
+header #facebook { grid-area: facebook; }
+header #font-resize { grid-area: font-resize; }
+header #contrast { grid-area: contrast; }
+
+header {
+  a:link, a:visited {
+    color: #fff;
+    text-decoration: none;
+    text-transform: lowercase;
+  }
+}
+
+header nav {
+  align-self: center;
+
+  ul {
+    display: flex;
+    margin: 0;
+    justify-content: space-evenly;
+    align-items: center;
+
+    li {
+      list-style-type: none;
+      text-align: center;
+
+      &.active {
+        border-bottom: 2px solid #fff;
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid #fff;
+        padding: 3px 0px;
+      }
+    }
+  }
+}
+
+header #contrast {
+  align-self: center;
+  white-space: nowrap;
+}
+
+header #logo {
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+
+  & > a {
+    display: block;
+    text-indent: -1000em;
+    height: 100%;
+    background-image: url(../images/pzw-logo-2018.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    white-space: nowrap;
+  }
+}
+
+#facebook {
+  align-self: center;
+}
+
+#facebook-logo {
+  width: 29px;
+  height: 29px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  .low-contrast & {
+    background-image: url(../images/facebook-blue.png);
+  }
+
+  .high-contrast & {
+    background-image: url(../images/facebook-white.png);
+  }
+}
+
+/* zmiana wielkosci czcionki */
+
+#font-resize {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#font-resize>a {
+  text-decoration: none;
+}
+
+.low-contrast #font-resize>a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.low-contrast #font-resize>a::before {
+  content: "A";
+}
+.low-contrast #font-resize>a>span {
+  display: none;
+}
+.low-contrast #font-resize-small {
+  font-size: 1.4rem;
+}
+.low-contrast #font-resize-medium {
+  font-size: 2rem;
+}
+.low-contrast #font-resize-large {
+  font-size: 2.6rem;
+}
+
+/* korekta linku od Artio JoomSEF */
+
 [href~="http://www.artio.net"] {
   display: none!important;
+}
+
+/* ukrywanie tekstu */
+
+/* Hides text from user but leaves it accessible for screen readers. */
+/* Source: http://webaim.org/techniques/css/invisiblecontent/ */
+.hidden-text {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
 }
