@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "https://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.7" type="template" client="site" method="upgrade">
+	<name>polskazobaczwiecej-2018</name>
+	<version>0.0.1</version>
+	<creationDate>2018-06-07</creationDate>
+	<author>Grzegorz Kowalski</author>
+	<authorEmail>grzegorz.kowalski@pot.gov.pl</authorEmail>
+	<copyright></copyright>
+	<description><![CDATA[TEMPLATE DESCRIPTION]]></description>
+	<files>
+    <folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>html</folder>
+    <filename>favicon.ico</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+	</files>
+	<positions>
+    <position>info</position>
+		<position>logo</position>
+		<position>nav</position>
+    <position>header</position>
+    <position>before_content</position>
+		<position>content</position>
+		<position>after_content</position>
+		<position>footer</position>
+	</positions>
+	<updateservers>
+		<server type="extension" name="Polska Zobacz Więcej 2018" priority="1">https://raw.githubusercontent.com/gakowalski/polskazobaczwiecej-2018/master/updates.xml</server>
+	</updateservers>
+</extension>
